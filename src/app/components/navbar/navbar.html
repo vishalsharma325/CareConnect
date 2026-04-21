@@ -1,21 +1,21 @@
-<nav class="bg-indigo-600 shadow-md">
+<nav class="bg-white shadow-sm border-b border-gray-100 font-sans">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
-        <a routerLink="/" class="text-white font-bold text-xl tracking-tight flex items-center gap-2">
-          <span class="bg-white text-indigo-600 rounded-full w-8 h-8 flex items-center justify-center font-black">✚</span>
+        <a routerLink="/" class="text-gray-900 font-bold text-2xl tracking-tight flex items-center gap-2">
+          <span class="text-[#0eb9f2] font-black leading-none mt-1">✚</span>
           CareConnect
         </a>
       </div>
       <div class="flex items-center gap-4">
         @if (user()) {
-          <span class="text-indigo-100 text-sm">Welcome, {{ user()?.name }}</span>
-          <button (click)="logout()" class="text-white bg-indigo-500 hover:bg-indigo-400 px-4 py-2 rounded text-sm font-medium transition cursor-pointer">
+          <span class="text-gray-600 text-sm font-medium">Welcome, {{ user()?.name }}</span>
+          <button (click)="logout()" class="text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded text-sm font-medium transition cursor-pointer">
             Logout
           </button>
         } @else {
-          <a routerLink="/login" class="text-indigo-600 bg-white hover:bg-gray-100 px-4 py-2 rounded text-sm font-medium transition cursor-pointer shadow-sm">
-            Login
+          <a routerLink="/login" class="text-white bg-[#0eb9f2] hover:bg-[#0da0d4] px-5 py-2 rounded text-sm font-bold transition cursor-pointer shadow-sm">
+            Login / Signup
           </a>
         }
       </div>

@@ -1,81 +1,128 @@
-<div class="bg-white">
+<div class="bg-white min-h-screen font-sans">
   <!-- Hero Section -->
-  <div class="relative bg-indigo-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24 text-center">
-      <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-        <span class="block text-indigo-600">CareConnect</span>
-        <span class="block text-3xl mt-3 text-gray-700">Healthcare at your fingertips</span>
-      </h1>
-      <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-        Book appointments, manage schedules, and connect with top-tier healthcare professionals seamlessly. Experience modern healthcare management.
-      </p>
-      <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-        <div class="rounded-md shadow">
-          <a routerLink="/login" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg transition cursor-pointer">
-            Get Started
-          </a>
+  <div class="bg-[#fcebea]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row items-center justify-between">
+      <div class="md:w-1/2 space-y-6">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+          Skip the travel!<br>
+          <span class="text-gray-800">Take Online Doctor Consultation</span>
+        </h1>
+        <p class="text-lg text-gray-700">Private consultation + Audio call • Starts at just ₹199</p>
+        
+        <div class="flex items-center space-x-2">
+          <div class="flex -space-x-2">
+            <img class="w-8 h-8 rounded-full border-2 border-[#fcebea] object-cover" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop" alt="Doctor">
+            <img class="w-8 h-8 rounded-full border-2 border-[#fcebea] object-cover" src="https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?w=100&h=100&fit=crop" alt="Doctor">
+            <img class="w-8 h-8 rounded-full border-2 border-[#fcebea] object-cover" src="https://images.unsplash.com/photo-1594824436998-d40d9eb4df73?w=100&h=100&fit=crop" alt="Doctor">
+          </div>
+          <span class="text-sm text-gray-600 font-medium">+191 Doctors are online <span class="inline-block w-2 h-2 bg-green-500 rounded-full ml-1"></span></span>
         </div>
+
+        <button routerLink="/login" class="bg-[#0eb9f2] text-white px-8 py-3 rounded font-bold hover:bg-[#0da0d4] transition shadow-md cursor-pointer">
+          Consult Now
+        </button>
+
+        <div class="flex space-x-6 text-sm text-gray-600 pt-4">
+          <span class="flex items-center"><span class="material-icons text-sm mr-1">verified_user</span> Verified Doctors</span>
+          <span class="flex items-center"><span class="material-icons text-sm mr-1">receipt</span> Digital Prescription</span>
+          <span class="flex items-center"><span class="material-icons text-sm mr-1">chat</span> Free Followup</span>
+        </div>
+      </div>
+      <div class="md:w-1/2 mt-10 md:mt-0 flex justify-end">
+        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600&h=400" alt="Doctor standing confidently" class="rounded-lg object-cover h-[400px] shadow-lg">
       </div>
     </div>
   </div>
 
-  <!-- Features Section -->
-  <div class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Features</h2>
-        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          Everything you need in one platform
-        </p>
+  <!-- Specialities Section -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex justify-between items-end mb-8">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-900">25+ Specialities</h2>
+        <p class="text-gray-500 mt-2 text-lg">Consult with top doctors across specialities</p>
+      </div>
+      <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded font-medium hover:bg-gray-50 transition cursor-pointer">See all Specialities</button>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+      @for (spec of specialities; track spec.name) {
+        <div class="flex flex-col items-center p-4 border rounded-lg hover:shadow-md transition cursor-pointer text-center group bg-white">
+          <div class="w-16 h-16 rounded-full bg-[#f8f9fa] flex items-center justify-center text-gray-600 mb-3 group-hover:text-indigo-600 transition">
+            <span class="material-icons text-3xl">{{ spec.icon }}</span>
+          </div>
+          <span class="text-sm font-medium text-gray-900">{{ spec.name }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Our Doctors Section -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8">Our Doctors</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (doc of topDoctors; track doc.name) {
+        <div class="border rounded-lg p-4 flex gap-4 hover:shadow-md transition bg-white cursor-pointer group">
+          <img [src]="doc.image" alt="{{ doc.name }}" class="w-16 h-16 rounded-full object-cover border border-gray-100">
+          <div>
+            <h3 class="font-bold text-gray-900 text-sm group-hover:text-indigo-600 transition">{{ doc.name }}</h3>
+            <p class="text-xs text-gray-500 mt-1">{{ doc.speciality }}</p>
+            <p class="text-xs text-gray-500 mt-1">{{ doc.experience }}</p>
+            <p class="text-xs text-gray-500 font-medium mt-1">{{ doc.consults }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+    <h2 class="text-3xl font-bold text-gray-900 mb-12">How it works</h2>
+    <div class="flex flex-col md:flex-row items-center justify-between relative max-w-4xl mx-auto">
+      <!-- Line connecting steps (hidden on mobile) -->
+      <div class="hidden md:block absolute top-1/3 left-0 w-full h-px bg-gray-200 -z-10"></div>
+      
+      <div class="flex flex-col items-center bg-white px-4">
+        <div class="w-16 h-16 bg-[#f8f9fa] rounded-full flex items-center justify-center border border-gray-100 shadow-sm mb-4">
+          <span class="material-icons text-gray-400">touch_app</span>
+        </div>
+        <p class="text-sm font-medium text-gray-700">Select a speciality or symptom</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="pt-6">
-          <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
-            <div class="-mt-6">
-              <div>
-                <span class="inline-flex items-center justify-center p-3 bg-indigo-500 rounded-md shadow-lg">
-                  <span class="text-white text-xl font-bold">👨‍⚕️</span>
-                </span>
-              </div>
-              <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">For Patients</h3>
-              <p class="mt-5 text-base text-gray-500">
-                Search for specialized doctors, book appointments instantly, and manage your medical history all in one secure portal.
-              </p>
-            </div>
-          </div>
+      <div class="flex flex-col items-center bg-white px-4 mt-8 md:mt-0">
+        <div class="w-16 h-16 bg-[#f8f9fa] rounded-full flex items-center justify-center border border-gray-100 shadow-sm mb-4">
+          <span class="material-icons text-gray-400">forum</span>
         </div>
+        <p class="text-sm font-medium text-gray-700">Audio/video call with a verified doctor</p>
+      </div>
 
-        <div class="pt-6">
-          <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
-            <div class="-mt-6">
-              <div>
-                <span class="inline-flex items-center justify-center p-3 bg-green-500 rounded-md shadow-lg">
-                  <span class="text-white text-xl font-bold">🩺</span>
-                </span>
-              </div>
-              <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">For Doctors</h3>
-              <p class="mt-5 text-base text-gray-500">
-                Manage your daily schedule, accept or reschedule appointments, and keep your profile updated for patients to find you easily.
-              </p>
-            </div>
-          </div>
+      <div class="flex flex-col items-center bg-white px-4 mt-8 md:mt-0">
+        <div class="w-16 h-16 bg-[#f8f9fa] rounded-full flex items-center justify-center border border-gray-100 shadow-sm mb-4">
+          <span class="material-icons text-gray-400">receipt_long</span>
         </div>
+        <p class="text-sm font-medium text-gray-700">Get a digital prescription & a free follow-up</p>
+      </div>
+    </div>
+  </div>
 
-        <div class="pt-6">
-          <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
-            <div class="-mt-6">
-              <div>
-                <span class="inline-flex items-center justify-center p-3 bg-orange-500 rounded-md shadow-lg">
-                  <span class="text-white text-xl font-bold">⚙️</span>
-                </span>
-              </div>
-              <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">For Admins</h3>
-              <p class="mt-5 text-base text-gray-500">
-                Monitor platform activity, onboard new medical professionals, and manage users with a powerful administrative dashboard.
-              </p>
-            </div>
-          </div>
+  <!-- Footer Stats Section -->
+  <div class="bg-[#2d2d32] py-12 mt-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-3xl font-bold text-white mb-2">2,00,000+</div>
+          <div class="text-gray-400 text-sm font-medium">Happy Users</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-white mb-2">20,000+</div>
+          <div class="text-gray-400 text-sm font-medium">Verified Doctors</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-white mb-2">25+</div>
+          <div class="text-gray-400 text-sm font-medium">Specialities</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-white mb-2">4.5 / 5</div>
+          <div class="text-gray-400 text-sm font-medium">App Rating</div>
         </div>
       </div>
     </div>
