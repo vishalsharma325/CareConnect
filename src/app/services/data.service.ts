@@ -5,11 +5,19 @@ import { StorageService } from './storage.service';
 const INITIAL_USERS: User[] = [
   { id: '1', name: 'John Patient', email: 'patient@demo.com', role: 'patient' },
   { id: '2', name: 'Dr. Smith', email: 'doctor@demo.com', role: 'doctor' },
-  { id: '3', name: 'Admin', email: 'admin@demo.com', role: 'admin' }
+  { id: '3', name: 'Admin', email: 'admin@demo.com', role: 'admin' },
+  { id: '4', name: 'Dr. Tejashree M', email: 'tejashree@demo.com', role: 'doctor' },
+  { id: '5', name: 'Dr. Vidhi Shah', email: 'vidhi@demo.com', role: 'doctor' },
+  { id: '6', name: 'Dr. Rashmi Nandwana', email: 'rashmi@demo.com', role: 'doctor' },
+  { id: '7', name: 'Dr. Tariq Ahmad Bhat', email: 'tariq@demo.com', role: 'doctor' }
 ];
 
 const INITIAL_DOCTORS: Doctor[] = [
-  { id: '2', name: 'Dr. Smith', email: 'doctor@demo.com', role: 'doctor', specialization: 'Cardiology', availableSlots: ['09:00', '10:00', '14:00'] }
+  { id: '2', name: 'Dr. Smith', email: 'doctor@demo.com', role: 'doctor', specialization: 'Cardiology', availableSlots: ['09:00', '10:00', '14:00'] },
+  { id: '4', name: 'Dr. Tejashree M', email: 'tejashree@demo.com', role: 'doctor', specialization: 'Laparoscopic Surgeon (Obs & Gyn)', availableSlots: ['10:00', '11:00', '15:00', '16:00'] },
+  { id: '5', name: 'Dr. Vidhi Shah', email: 'vidhi@demo.com', role: 'doctor', specialization: 'Gynecologist, Obstetrician', availableSlots: ['09:30', '10:30', '14:30', '15:30'] },
+  { id: '6', name: 'Dr. Rashmi Nandwana', email: 'rashmi@demo.com', role: 'doctor', specialization: 'Dermatologist', availableSlots: ['09:00', '12:00', '16:00', '17:00'] },
+  { id: '7', name: 'Dr. Tariq Ahmad Bhat', email: 'tariq@demo.com', role: 'doctor', specialization: 'Sexologist, Psychiatrist', availableSlots: ['11:00', '13:00', '18:00', '19:00'] }
 ];
 
 @Injectable({
@@ -21,12 +29,36 @@ export class DataService {
   }
 
   private initData() {
-    if (!this.storage.getItem('users')) {
-      this.storage.setItem('users', INITIAL_USERS);
+    let users = this.storage.getItem<User[]>('users');
+    if (!users) {
+      users = [...INITIAL_USERS];
+      this.storage.setItem('users', users);
+    } else {
+      let updated = false;
+      INITIAL_USERS.forEach(iu => {
+        if (!users!.find(u => u.id === iu.id)) {
+          users!.push(iu);
+          updated = true;
+        }
+      });
+      if (updated) this.storage.setItem('users', users);
     }
-    if (!this.storage.getItem('doctors')) {
-      this.storage.setItem('doctors', INITIAL_DOCTORS);
+
+    let doctors = this.storage.getItem<Doctor[]>('doctors');
+    if (!doctors) {
+      doctors = [...INITIAL_DOCTORS];
+      this.storage.setItem('doctors', doctors);
+    } else {
+      let updated = false;
+      INITIAL_DOCTORS.forEach(idoc => {
+        if (!doctors!.find(d => d.id === idoc.id)) {
+          doctors!.push(idoc);
+          updated = true;
+        }
+      });
+      if (updated) this.storage.setItem('doctors', doctors);
     }
+
     if (!this.storage.getItem('appointments')) {
       this.storage.setItem('appointments', []);
     }
