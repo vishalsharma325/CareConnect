@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home';
 import { LoginComponent } from './components/login/login';
+import { RegisterComponent } from './components/register/register';
+import { ProfileSetupComponent } from './components/profile-setup/profile-setup';
 import { DashboardComponent as PatientDashboard } from './components/patient/dashboard/dashboard';
 import { DashboardComponent as DoctorDashboard } from './components/doctor/dashboard/dashboard';
 import { DashboardComponent as AdminDashboard } from './components/admin/dashboard/dashboard';
@@ -10,6 +12,8 @@ import { roleGuard } from './guards/role.guard';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'profile-setup', component: ProfileSetupComponent },
   { 
     path: 'patient', 
     component: PatientDashboard,

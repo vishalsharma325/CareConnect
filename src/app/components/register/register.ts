@@ -5,14 +5,15 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './login.html'
+  templateUrl: './register.html'
 })
-export class LoginComponent {
+export class RegisterComponent {
   email = '';
   password = '';
   error = '';
+  loading = false;
 
   constructor(private auth: AuthService, private router: Router) {
     if (this.auth.currentUser()) {
@@ -22,23 +23,27 @@ export class LoginComponent {
 
   async onSubmit() {
     this.error = '';
-    const success = await this.auth.login(this.email, this.password);
-    if (!success) {
-      this.error = 'Invalid email or password.';
+    this.loading = true;
+    try {
+      const success = await this.auth.register(this.email, this.password);
+      if (success) {
+        // Redirect to profile setup
+        this.router.navigate(['/profile-setup']);
+      } else {
+        this.error = 'Registration failed. Please try again.';
+      }
+    } catch (err: any) {
+      this.error = err.message || 'An error occurred during registration.';
+    } finally {
+      this.loading = false;
     }
   }
 
-  async loginWithGoogle() {
+  async registerWithGoogle() {
     this.error = '';
     const success = await this.auth.signInWithGoogle();
     if (!success) {
       this.error = 'Google Sign-In failed.';
     }
-  }
-
-  loginAs(role: 'patient' | 'doctor' | 'admin') {
-    this.email = `${role}@demo.com`;
-    this.password = 'pass123';
-    this.onSubmit();
   }
 }

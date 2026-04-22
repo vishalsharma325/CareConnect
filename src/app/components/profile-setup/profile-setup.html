@@ -1,0 +1,80 @@
+<div class="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
+  <div class="max-w-2xl w-full space-y-8 bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
+    <div>
+      <div class="mx-auto w-16 h-16 bg-[#e6f8fe] rounded-full flex items-center justify-center mb-4">
+        <span class="material-icons text-[#0eb9f2] text-3xl">manage_accounts</span>
+      </div>
+      <h2 class="text-center text-3xl font-bold text-gray-900">
+        Set Up Your Profile
+      </h2>
+      <p class="mt-2 text-center text-sm text-gray-500 font-medium">
+        Please provide your details to complete the registration.
+      </p>
+    </div>
+    <form class="mt-8 space-y-6" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div class="sm:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+          <input name="name" type="text" required [(ngModel)]="name"
+            class="appearance-none block w-full px-4 py-3 border border-gray-200 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0eb9f2] focus:border-transparent transition">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Age</label>
+          <input name="age" type="number" [(ngModel)]="age"
+            class="appearance-none block w-full px-4 py-3 border border-gray-200 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0eb9f2] focus:border-transparent transition">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Sex</label>
+          <select name="sex" [(ngModel)]="sex" required class="block w-full px-4 py-3 border border-gray-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0eb9f2] focus:border-transparent transition bg-white">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+          <select name="role" [(ngModel)]="role" required class="block w-full px-4 py-3 border border-gray-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0eb9f2] focus:border-transparent transition bg-white">
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Phone (Optional)</label>
+          <input name="phone" type="tel" [(ngModel)]="phone"
+            class="appearance-none block w-full px-4 py-3 border border-gray-200 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0eb9f2] focus:border-transparent transition">
+        </div>
+        
+        <!-- Doctor specific fields -->
+        @if (role === 'doctor') {
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Specialty</label>
+            <input name="specialty" type="text" [(ngModel)]="specialty" required
+              class="appearance-none block w-full px-4 py-3 border border-gray-200 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0eb9f2] focus:border-transparent transition">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Qualifications</label>
+            <input name="qualifications" type="text" [(ngModel)]="qualifications" required
+              class="appearance-none block w-full px-4 py-3 border border-gray-200 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0eb9f2] focus:border-transparent transition">
+          </div>
+        }
+      </div>
+
+      @if (error) {
+        <div class="text-red-500 text-sm text-center font-medium bg-red-50 p-3 rounded-lg">
+          {{ error }}
+        </div>
+      }
+
+      <div>
+        <button type="submit" [disabled]="loading || !name"
+          class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-lg text-white bg-[#0eb9f2] hover:bg-[#0da0d4] shadow-md transition cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed">
+          {{ loading ? 'Saving...' : 'Complete Profile' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
